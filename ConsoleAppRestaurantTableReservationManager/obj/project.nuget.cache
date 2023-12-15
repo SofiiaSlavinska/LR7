@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "5ySKCKpSKpmJhkTOYvOhdmL9y9/eEzyigkVnVds7+/Rgo1ZgxMP8a1bFsj62ltQQz9/kwJOATphY21nEw3OOOQ==",
+  "dgSpecHash": "t3A9GKibc82Annloe+xlcnJ4Ap5pqQh90Avp82mGCEqSr2N9V4ONLEaDLfIMYEmFAP1nGQOd9P6sz7MwEj96pg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\goodw\\source\\repos\\v-ivanenko\\ConsoleAppRestaurantTableReservationManager\\ConsoleAppRestaurantTableReservationManager.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\LR7\\ConsoleAppRestaurantTableReservationManager\\ConsoleAppRestaurantTableReservationManager.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.14\\microsoft.netcore.app.host.win-x64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

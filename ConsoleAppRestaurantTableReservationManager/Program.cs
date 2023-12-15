@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 
 // Main Application Class
-public class TableReservationApp
+public class main
 {
     static void Main(string[] args)
     {
-        ReservationManagerClass m = new ReservationManagerClass();
+        ResMan m = new ResMan();
         m.AddRestaurantMethod("A", 10);
         m.AddRestaurantMethod("B", 5);
 
@@ -17,14 +17,14 @@ public class TableReservationApp
 }
 
 // Reservation Manager Class
-public class ReservationManagerClass
+public class ResMan
 {
     // res
-    public List<RestaurantClass> res;
+    public List<Rest> res;
 
-    public ReservationManagerClass()
+    public ResMan()
     {
-        res = new List<RestaurantClass>();
+        res = new List<Rest>();
     }
 
     // Add Restaurant Method
@@ -32,12 +32,12 @@ public class ReservationManagerClass
     {
         try
         {
-            RestaurantClass r = new RestaurantClass();
+            Rest r = new Rest();
             r.n = n;
-            r.t = new RestaurantTableClass[t];
+            r.t = new RestTable[t];
             for (int i = 0; i < t; i++)
             {
-                r.t[i] = new RestaurantTableClass();
+                r.t[i] = new RestTable();
             }
             res.Add(r);
         }
@@ -126,8 +126,8 @@ public class ReservationManagerClass
                 swapped = false;
                 for (int i = 0; i < res.Count - 1; i++)
                 {
-                    int avTc = CountAvailableTablesForRestaurantClassAndDateTimeMethod(res[i], dt); // available tables current
-                    int avTn = CountAvailableTablesForRestaurantClassAndDateTimeMethod(res[i + 1], dt); // available tables next
+                    int avTc = CountAvailableTablesForRestAndDateTimeMethod(res[i], dt); // available tables current
+                    int avTn = CountAvailableTablesForRestAndDateTimeMethod(res[i + 1], dt); // available tables next
 
                     if (avTc < avTn)
                     {
@@ -147,7 +147,7 @@ public class ReservationManagerClass
     }
 
     // count available tables in a restaurant
-    public int CountAvailableTablesForRestaurantClassAndDateTimeMethod(RestaurantClass r, DateTime dt)
+    public int CountAvailableTablesForRestAndDateTimeMethod(Rest r, DateTime dt)
     {
         try
         {
@@ -170,19 +170,19 @@ public class ReservationManagerClass
 }
 
 // Restaurant Class
-public class RestaurantClass
+public class Rest
 {
     public string n; //name
-    public RestaurantTableClass[] t; // tables
+    public RestTable[] t; // tables
 }
 
 // Table Class
-public class RestaurantTableClass
+public class RestTable
 {
     private List<DateTime> bd; //booked dates
 
 
-    public RestaurantTableClass()
+    public RestTable()
     {
         bd = new List<DateTime>();
     }
