@@ -7,9 +7,9 @@ public class main
     static void Main(string[] args)
     {
         ResMan m = new ResMan();
-        TableBooker b = new TableBooker(m);
-        m.AddRestaurantMethod("A", 10);
-        m.AddRestaurantMethod("B", 5);
+        TableBook b = new TableBook(m);
+        m.AddRest("A", 10);
+        m.AddRest("B", 5);
 
         Console.WriteLine(b.BookTable("A", new DateTime(2023, 12, 25), 3)); // True
         Console.WriteLine(b.BookTable("A", new DateTime(2023, 12, 25), 3)); // False
@@ -28,7 +28,7 @@ public class main
     }
 
     // Add Restaurant Method
-    public void AddRestaurantMethod(string n, int t)
+    public void AddRest(string n, int t)
     {
         try
         {
@@ -49,7 +49,7 @@ public class main
 
     // Load Restaurants From
     // File
-    private void LoadRestaurantsFromFileMethod(string fileP)
+    private void LoadRest(string fileP)
     {
         try
         {
@@ -59,7 +59,7 @@ public class main
                 var parts = l.Split(',');
                 if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
                 {
-                    AddRestaurantMethod(parts[0], tableCount);
+                    AddRest(parts[0], tableCount);
                 }
                 else
                 {
@@ -116,7 +116,7 @@ public class main
         throw new Exception(null); //Restaurant not found
     }
 
-    public void SortRestaurantsByAvailabilityForUsersMethod(DateTime dt)
+    public void SortRest(DateTime dt)
     {
         try
         { 
@@ -126,8 +126,8 @@ public class main
                 swapped = false;
                 for (int i = 0; i < res.Count - 1; i++)
                 {
-                    int avTc = CountAvailableTablesForRestAndDateTimeMethod(res[i], dt); // available tables current
-                    int avTn = CountAvailableTablesForRestAndDateTimeMethod(res[i + 1], dt); // available tables next
+                    int avTc = CountTable(res[i], dt); // available tables current
+                    int avTn = CountTable(res[i + 1], dt); // available tables next
 
                     if (avTc < avTn)
                     {
@@ -147,7 +147,7 @@ public class main
     }
 
     // count available tables in a restaurant
-    public int CountAvailableTablesForRestAndDateTimeMethod(Rest r, DateTime dt)
+    public int CountTable(Rest r, DateTime dt)
     {
         try
         {
@@ -178,7 +178,7 @@ public class ResMan
         res = new List<Rest>();
     }
 
-    public void AddRestaurantMethod(string n, int t)
+    public void AddRest(string n, int t)
     {
         try
         {
@@ -198,16 +198,16 @@ public class ResMan
     }
 }
 
-public class FileLoader
+public class FileLoad
 {
     private ResMan resMan;
 
-    public FileLoader(ResMan resMan)
+    public FileLoad(ResMan resMan)
     {
         this.resMan = resMan;
     }
 
-    public void LoadRestaurantsFromFileMethod(string fileP)
+    public void LoadRest(string fileP)
     {
         try
         {
@@ -217,7 +217,7 @@ public class FileLoader
                 var parts = l.Split(',');
                 if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
                 {
-                    resMan.AddRestaurantMethod(parts[0], tableCount);
+                    resMan.AddRest(parts[0], tableCount);
                 }
                 else
                 {
@@ -232,11 +232,11 @@ public class FileLoader
     }
 }
 
-public class TableFinder
+public class TableFind
 {
     private ResMan resMan;
 
-    public TableFinder(ResMan resMan)
+    public TableFind(ResMan resMan)
     {
         this.resMan = resMan;
     }
@@ -266,11 +266,11 @@ public class TableFinder
     }
 }
 
-public class TableBooker
+public class TableBook
 {
     private ResMan resMan;
 
-    public TableBooker(ResMan resMan)
+    public TableBook(ResMan resMan)
     {
         this.resMan = resMan;
     }
@@ -294,16 +294,17 @@ public class TableBooker
     }
 }
 
-public class RestaurantSorter
+public class RestSort
 {
     private ResMan resMan;
 
-    public RestaurantSorter(ResMan resMan)
+    public RestSort(ResMan resMan)
     {
         this.resMan = resMan;
     }
 
-    public void SortRestaurantsByAvailabilityForUsersMethod(DateTime dt)
+
+    public void SortRest(DateTime dt)
     {
         try
         {
@@ -311,10 +312,10 @@ public class RestaurantSorter
             do
             {
                 swapped = false;
-                for (int i = 0; i < resMan.Count - 1; i++)
+                for (int i = 0; i < resMan.res.Count - 1; i++)
                 {
-                    int avTc = CountAvailableTablesForRestAndDateTimeMethod(resMan.res[i], dt); // available tables current
-                    int avTn = CountAvailableTablesForRestAndDateTimeMethod(resMan.res[i + 1], dt); // available tables next
+                    int avTc = CountTable(resMan.res[i], dt); // available tables current
+                    int avTn = CountTable(resMan.res[i + 1], dt); // available tables next
 
                     if (avTc < avTn)
                     {
@@ -333,7 +334,7 @@ public class RestaurantSorter
         }
     }
 
-    public int CountAvailableTablesForRestAndDateTimeMethod(Rest r, DateTime dt)
+    public int CountTable(Rest r, DateTime dt)
     {
         try
         {

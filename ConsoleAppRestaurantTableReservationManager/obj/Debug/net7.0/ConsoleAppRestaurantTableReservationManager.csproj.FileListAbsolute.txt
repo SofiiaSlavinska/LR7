@@ -20,3 +20,10 @@ D:\LR7\ConsoleAppRestaurantTableReservationManager\obj\Debug\net7.0\ConsoleAppRe
 D:\LR7\ConsoleAppRestaurantTableReservationManager\obj\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.dll
 D:\LR7\ConsoleAppRestaurantTableReservationManager\obj\Debug\net7.0\refint\ConsoleAppRestaurantTableReservationManager.dll
 D:\LR7\ConsoleAppRestaurantTableReservationManager\obj\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.pdb
+D:\LR7\ConsoleAppRestaurantTableReservationManager\bin\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.exe
+D:\LR7\ConsoleAppRestaurantTableReservationManager\bin\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.deps.json
+D:\LR7\ConsoleAppRestaurantTableReservationManager\bin\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.runtimeconfig.json
+D:\LR7\ConsoleAppRestaurantTableReservationManager\bin\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.dll
+D:\LR7\ConsoleAppRestaurantTableReservationManager\bin\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.pdb
+D:\LR7\ConsoleAppRestaurantTableReservationManager\obj\Debug\net7.0\ConsoleAppRestaurantTableReservationManager.genruntimeconfig.cache
+D:\LR7\ConsoleAppRestaurantTableReservationManager\obj\Debug\net7.0\ref\ConsoleAppRestaurantTableReservationManager.dll
