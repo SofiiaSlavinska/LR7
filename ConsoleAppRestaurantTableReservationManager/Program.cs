@@ -2,40 +2,40 @@
 using System.Collections.Generic;
 
 // Main Application Class
-public class main
+public class MainApp
 {
     static void Main(string[] args)
     {
-        ResMan m = new ResMan();
-        TableBook b = new TableBook(m);
-        m.AddRest("A", 10);
-        m.AddRest("B", 5);
+        ResMan resMan = new ResMan();
+        TableBook tableBook = new TableBook(resMan);
+        resMan.AddRest("A", 10);
+        resMan.AddRest("tableBook", 5);
 
-        Console.WriteLine(b.BookTable("A", new DateTime(2023, 12, 25), 3)); // True
-        Console.WriteLine(b.BookTable("A", new DateTime(2023, 12, 25), 3)); // False
+        Console.WriteLine(tableBook.BookTable("A", new DateTime(2023, 12, 25), 3)); // True
+        Console.WriteLine(tableBook.BookTable("A", new DateTime(2023, 12, 25), 3)); // False
     }
 }
 public class ResMan
 {
-    public List<Rest> res;
+    public List<Rest> rest { get; private set; }
 
     public ResMan()
     {
-        res = new List<Rest>();
+        rest = new List<Rest>();
     }
 
-    public void AddRest(string n, int t)
+    public void AddRest(string name, int table) //adding restaurants to list
     {
         try
         {
             Rest r = new Rest();
-            r.n = n;
-            r.t = new RestTable[t];
-            for (int i = 0; i < t; i++)
+            r.name = name;
+            r.table = new RestTable[table];
+            for (int i = 0; i < table; i++)
             {
-                r.t[i] = new RestTable();
+                r.table[i] = new RestTable();
             }
-            res.Add(r);
+            rest.Add(r);
         }
         catch (Exception ex)
         {
@@ -45,7 +45,7 @@ public class ResMan
     }
 }
 
-public class FileLoad
+public class FileLoad //loading data about restaurants
 {
     private ResMan resMan;
 
@@ -54,21 +54,21 @@ public class FileLoad
         this.resMan = resMan;
     }
 
-    public void LoadRest(string fileP)
+    public void LoadRest(string fileP) 
     {
         try
         {
-            string[] ls = File.ReadAllLines(fileP);
-            foreach (string l in ls)
+            string[] lines = File.ReadAllLines(fileP);
+            foreach (string line in lines)
             {
-                var parts = l.Split(',');
+                var parts = line.Split(',');
                 if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
                 {
                     resMan.AddRest(parts[0], tableCount);
                 }
                 else
                 {
-                    Console.WriteLine(l);
+                    Console.WriteLine(line);
                 }
             }
         }
@@ -89,18 +89,18 @@ public class TableFind
         this.resMan = resMan;
     }
 
-    public List<string> FindAllFreeTables(DateTime dt)
+    public List<string> FindAllFreeTables(DateTime dateTime) //not booked
     {
         try
         {
             List<string> free = new List<string>();
-            foreach (var r in resMan.res)
+            foreach (var r in resMan.rest)
             {
-                for (int i = 0; i < r.t.Length; i++)
+                for (int i = 0; i < r.table.Length; i++)
                 {
-                    if (!r.t[i].IsBooked(dt))
+                    if (!r.table[i].IsBooked(dateTime))
                     {
-                        free.Add($"{r.n} - Table {i + 1}");
+                        free.Add($"{r.name} - Table {i + 1}");
                     }
                 }
             }
@@ -124,18 +124,18 @@ public class TableBook
         this.resMan = resMan;
     }
 
-    public bool BookTable(string rName, DateTime d, int tNumber)
+    public bool BookTable(string rName, DateTime date, int tNumber)
     {
-        foreach (var r in resMan.res)
+        foreach (var r in resMan.rest)
         {
-            if (r.n == rName)
+            if (r.name == rName)
             {
-                if (tNumber < 0 || tNumber >= r.t.Length)
+                if (tNumber < 0 || tNumber >= r.table.Length)
                 {
                     throw new Exception(null); //Invalid table number
                 }
 
-                return r.t[tNumber].Book(d);
+                return r.table[tNumber].Book(date);
             }
         }
 
@@ -153,7 +153,7 @@ public class RestSort
     }
 
 
-    public void SortRest(DateTime dt)
+    public void SortRest(DateTime dateTime)
     {
         try
         {
@@ -161,17 +161,17 @@ public class RestSort
             do
             {
                 swapped = false;
-                for (int i = 0; i < resMan.res.Count - 1; i++)
+                for (int i = 0; i < resMan.rest.Count - 1; i++)
                 {
-                    int avTc = CountTable(resMan.res[i], dt); // available tables current
-                    int avTn = CountTable(resMan.res[i + 1], dt); // available tables next
+                    int availTablesC = CountTable(resMan.rest[i], dateTime); // available tables current
+                    int availTablesN = CountTable(resMan.rest[i + 1], dateTime); // available tables next
 
-                    if (avTc < avTn)
+                    if (availTablesC < availTablesN)
                     {
                         // Swap restaurants
-                        var temp = resMan.res[i];
-                        resMan.res[i] = resMan.res[i + 1];
-                        resMan.res[i + 1] = temp;
+                        var temp = resMan.rest[i];
+                        resMan.rest[i] = resMan.rest[i + 1];
+                        resMan.rest[i + 1] = temp;
                         swapped = true;
                     }
                 }
@@ -183,15 +183,14 @@ public class RestSort
             Console.WriteLine("Steck Trace: " + ex.StackTrace);
         }
     }
-
-    public int CountTable(Rest r, DateTime dt)
+    public int CountTable(Rest r, DateTime dateTime) //basically free tables
     {
         try
         {
             int count = 0;
-            foreach (var t in r.t)
+            foreach (var table in r.table)
             {
-                if (!t.IsBooked(dt))
+                if (!table.IsBooked(dateTime))
                 {
                     count++;
                 }
@@ -210,32 +209,32 @@ public class RestSort
 // Restaurant Class
 public class Rest
 {
-    public string n; //name
-    public RestTable[] t; // tables
+    public string name; //name
+    public RestTable[] table; // tables
 }
 
 // Table Class
 public class RestTable
 {
-    private List<DateTime> bd; //booked dates
+    private List<DateTime> bookedDate; //booked dates
 
 
     public RestTable()
     {
-        bd = new List<DateTime>();
+        bookedDate = new List<DateTime>();
     }
 
     // book
-    public bool Book(DateTime d)
+    public bool Book(DateTime date) //booking successful or not
     {
         try
         { 
-            if (bd.Contains(d))
+            if (bookedDate.Contains(date))
             {
                 return false;
             }
-            //add to bd
-            bd.Add(d);
+            //add to bookedDate
+            bookedDate.Add(date);
             return true;
         }
         catch (Exception ex)
@@ -247,8 +246,8 @@ public class RestTable
     }
 
     // is booked
-    public bool IsBooked(DateTime d)
+    public bool IsBooked(DateTime date)
     {
-        return bd.Contains(d);
+        return bookedDate.Contains(date);
     }
 }
