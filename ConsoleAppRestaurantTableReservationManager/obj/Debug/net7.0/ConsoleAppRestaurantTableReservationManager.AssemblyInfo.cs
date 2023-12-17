@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ConsoleAppRestaurantTableReservationManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+78b2892078410ccb84e0b10b75ad7bd986b028cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("ConsoleAppRestaurantTableReservationManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ConsoleAppRestaurantTableReservationManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
