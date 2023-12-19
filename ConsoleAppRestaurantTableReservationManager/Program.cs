@@ -80,6 +80,7 @@ public class FileLoad //loading data about restaurants
     }
 }
 
+
 public class TableFind
 {
     private ResMan resMan;

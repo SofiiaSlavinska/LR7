@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "t3A9GKibc82Annloe+xlcnJ4Ap5pqQh90Avp82mGCEqSr2N9V4ONLEaDLfIMYEmFAP1nGQOd9P6sz7MwEj96pg==",
+  "dgSpecHash": "Rz6DC3MI5vymW493ivXdCB9TR2fwRjlCVauZN18FvLJrleGvozP30n2uODenwxVVIY/FzVsYIKQ8lgEDmOHahw==",
   "success": true,
   "projectFilePath": "D:\\LR7\\ConsoleAppRestaurantTableReservationManager\\ConsoleAppRestaurantTableReservationManager.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\hp\\.nuget\\packages\\nunit\\4.0.1\\nunit.4.0.1.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\nunit3testadapter\\4.1.0\\nunit3testadapter.4.1.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
