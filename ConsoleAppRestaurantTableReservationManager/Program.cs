@@ -17,11 +17,11 @@ public class MainApp
 }
 public class ResMan
 {
-    public List<Rest> rest { get; private set; }
+    public Dictionary<string, Rest> rest { get; private set; }
 
     public ResMan()
     {
-        rest = new List<Rest>();
+        rest = new Dictionary <string, Rest>();
     }
 
     public void AddRest(string name, int table) //adding restaurants to list
@@ -35,7 +35,7 @@ public class ResMan
             {
                 r.table[i] = new RestTable();
             }
-            rest.Add(r);
+            rest.Add(name, r);
         }
         catch (Exception ex)
         {
@@ -94,8 +94,10 @@ public class TableFind
         try
         {
             List<string> free = new List<string>();
-            foreach (var r in resMan.rest)
+            foreach (KeyValuePair<string, Rest> pair in resMan.rest)
             {
+                Rest r = pair.Value;
+                RestTable[] tables = r.table;
                 for (int i = 0; i < r.table.Length; i++)
                 {
                     if (!r.table[i].IsBooked(dateTime))
@@ -126,8 +128,10 @@ public class TableBook
 
     public bool BookTable(string rName, DateTime date, int tNumber)
     {
-        foreach (var r in resMan.rest)
+        foreach (KeyValuePair<string, Rest> pair in resMan.rest)
         {
+            Rest r = pair.Value;
+            RestTable[] tables = r.table;
             if (r.name == rName)
             {
                 if (tNumber < 0 || tNumber >= r.table.Length)
@@ -157,21 +161,24 @@ public class RestSort
     {
         try
         {
+            List<KeyValuePair<string, Rest>> restList = new List<KeyValuePair<string, Rest>>(resMan.rest);
+            restList.Sort((pair1, pair2) => CountTable(pair1.Value, dateTime).CompareTo(CountTable(pair2.Value, dateTime)));
+
             bool swapped;
             do
             {
                 swapped = false;
-                for (int i = 0; i < resMan.rest.Count - 1; i++)
+                for (int i = 0; i < restList.Count - 1; i++)
                 {
-                    int availTablesC = CountTable(resMan.rest[i], dateTime); // available tables current
-                    int availTablesN = CountTable(resMan.rest[i + 1], dateTime); // available tables next
+                    int availTablesC = CountTable(restList[i].Value, dateTime); // available tables current
+                    int availTablesN = CountTable(restList[i + 1].Value, dateTime); // available tables next
 
                     if (availTablesC < availTablesN)
                     {
                         // Swap restaurants
-                        var temp = resMan.rest[i];
-                        resMan.rest[i] = resMan.rest[i + 1];
-                        resMan.rest[i + 1] = temp;
+                        var temp = restList[i];
+                        restList[i] = restList[i + 1];
+                        restList[i + 1] = temp;
                         swapped = true;
                     }
                 }
