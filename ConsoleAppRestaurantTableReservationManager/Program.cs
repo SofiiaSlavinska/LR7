@@ -216,19 +216,19 @@ public class RestSort
 // Restaurant Class
 public class Rest
 {
-    public string name; //name
+    public string name { get; set; } //name
     public RestTable[] table; // tables
 }
 
 // Table Class
 public class RestTable
 {
-    private List<DateTime> bookedDate; //booked dates
-
+    private HashSet<DateTime> bookedDate; //booked dates
+ 
 
     public RestTable()
     {
-        bookedDate = new List<DateTime>();
+        bookedDate = new HashSet<DateTime>();
     }
 
     // book
